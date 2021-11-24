@@ -28,6 +28,7 @@ editor_options:
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, dev='cairo_pdf')
 options(tinytex.verbose = TRUE)
 library(tidyverse)
+theme_set(theme_void())
 # create qrcode
 # library(qrcode)
 # png(filename="images/00_qrcode.png", width = 150, height = 150)
@@ -40,9 +41,9 @@ library(tidyverse)
 # Работы Р. Н. Клычева
 ## Работы Р. Н. Клычева, посвященные глагольным аффиксам в абазинском
 
-* [@klychev72]: Глагольные суффиксы направления в абазинском и абхазском языках (по данным всех абазино-абхазских диалектов)
-* [@klychev94]: Локально-превербное образование глаголов абазинского языка
-* [@klychev95]: Словарь сочетаемости локальных превербов с суффиксоидами и глагольными корнями в абазинском языке
+* [@klychev72]: "Глагольные суффиксы направления в абазинском и абхазском языках (по данным всех абазино-абхазских диалектов)"
+* [@klychev94]: "Локально-превербное образование глаголов абазинского языка"
+* [@klychev95]: "Словарь сочетаемости локальных превербов с суффиксоидами и глагольными корнями в абазинском языке"
 * и другие работы [@klychev74; @klychev83; @klychev89; @klychev90].
 
 ## Подробнее о [@klychev95]
@@ -81,7 +82,7 @@ knitr::include_graphics("images/klychev_example.png", dpi= 250)
 
 ## Результат дигитализации словаря
 
-* В результате работы получилась таблица со следующими полями:
+* В результате получилась таблица со следующими полями:
     * section_id: `94`
     * section_name: `ПРЕВЕРБ тшкIара+КОРНИ`
     * pages: `220`
@@ -103,8 +104,54 @@ knitr::include_graphics("images/klychev_example.png", dpi= 250)
 ## Возможное применение полученой базы данных
 
 * расширение словарей
+    * поморфемный поиск предоставляет дополнительные возможности для исследования
     * это в свою очередь улучшает разные прикладные применения, например, cистемы проверки правописания, предиктивное правописание
-* пополенение корпуса абазинского языка [@panova21]
+* пополенение корпуса абазинского языка http://lingconlab.ru/spoken_abaza/ [@panova21]
+    
+## Поморфемный поиск: копать
+
+```{r, fig.height=3.3}
+read_csv("data/graph_1.csv") %>% 
+  mutate(label = str_c(label, " ")) %>% 
+  ggplot(aes(x, y, label = label, group = group))+
+  geom_line()+
+  geom_label(size = 6, hjust = "left", nudge_x = -0.1)+
+  xlim(0, 5.5)
+```
+
+## Поморфемный поиск: сохнуть$_1$, сохнуть$_2$
+
+```{r, fig.height=3.3}
+read_csv("data/graph_2.csv") %>%
+  mutate(label = str_c(label, " ")) %>% 
+  ggplot(aes(x, y, label = label, group = group))+
+  geom_line()+
+  geom_label(size = 6, hjust = "left", nudge_x = -0.1)+
+  xlim(0, 5.5)
+```
+
+
+## Поморфемный поиск: *хъы-кIв*
+
+```{r, fig.height=3.3}
+read_csv("data/graph_3.csv") %>%
+  mutate(label = str_c(label, " ")) %>% 
+  ggplot(aes(x, y, label = label, group = group))+
+  geom_line()+
+  geom_label(size = 6, hjust = "left", nudge_x = -0.1)+
+  xlim(0, 8)
+```
+
+См. также [@klychev74]: "К структуре глагольной основы *кIв* + корень + *ш(а)* в абазинском языке"
+
+# Заключение
+## Планы на будущее
+
+* дальнейшее выверка базы данных
+    * опечатки
+    * морфемное деление
+* завершение аннотации корней и морфем
+* 
 
 ## {}
 
